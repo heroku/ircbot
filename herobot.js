@@ -1,7 +1,7 @@
 var options = {
   server: 'irc.freenode.net',
   nick: 'herobot',
-  channels: ['#norbauer']
+  channels: ['#heroku']
 };
 
 var jerk = require('jerk');
