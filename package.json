@@ -2,9 +2,9 @@
   "name": "herobot",
   "version": "0.0.1",
   "dependencies": {
-    "jerk": "1.1.12",
-    "coloured": "0.2.0",
-    "log": "1.2.0",
-    "coffee-script": "1.1.1"
+    "jerk": ">=1.1.12",
+    "coloured": ">=0.2.0",
+    "log": ">=1.2.0",
+    "coffee-script": ">=1.1.1"
   }
 }
