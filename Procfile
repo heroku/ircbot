@@ -1,1 +1,1 @@
-bot: coffee -c *.coffee && node run.js
+bot: node run.js
