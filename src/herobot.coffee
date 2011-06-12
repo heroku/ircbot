@@ -8,7 +8,7 @@ OPTIONS =
   production:
     server: 'irc.freenode.net'
     nick: 'herobot'
-    channels: ['heroku']
+    channels: ['#heroku']
 
 URL_COMMANDS =
   google:
