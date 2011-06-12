@@ -1,55 +1,69 @@
-module.exports = ->
+Jerk = require 'jerk'
 
-  jerk = require 'jerk'
+OPTIONS =
+  development:
+    server: 'irc.freenode.net'
+    nick: 'herobotest'
+    channels: ['#norbauer']
+  production:
+    server: 'irc.freenode.net'
+    nick: 'herobot'
+    channels: ['heroku']
 
-  options =
-    server: 'irc.freenode.net',
-    nick: 'herobot',
-    channels: ['#heroku']
+URL_COMMANDS =
+  google:
+    url: 'http://www.google.com/search?q='
+    escape: '+'
+  article:
+    url: 'http://devcenter.heroku.com/articles/'
+    escape: '-'
+  tag:
+    url: 'http://devcenter.heroku.com/tags/'
+    escape: '-'
+  search:
+    url: 'http://devcenter.heroku.com/articles?q='
+    escape: '+'
 
-  url_commands =
-    google:
-      url: 'http://www.google.com/search?q='
-      escape: '+'
-    article:
-      url: 'http://devcenter.heroku.com/articles/'
-      escape: '-'
-    tag:
-      url: 'http://devcenter.heroku.com/tags/'
-      escape: '-'
-    search:
-      url: 'http://devcenter.heroku.com/articles?q='
-      escape: '+'
+HEROKU_HELP_MESSAGE =
+  '''
+  Welcome to the Heroku community channel. Before asking a question, please
+  search http://devcenter.heroku.com and Google. You can check platform status
+  at http://status.heroku.com. Note that official support is available only
+  through http://support.heroku.com. Please do not spam the channel with your
+  question or the word 'heroku'.
+  '''
+    .replace(/\n/g, ' ')
 
-  heroku_help_message = "Welcome to the Heroku community channel. Before asking a
- question, please search http://devcenter.heroku.com and Google. You can check
- platform status at http://status.heroku.com.  Note that official support is
- available only through http://support.heroku.com.  Please do not spam the
- channel with your question or the word 'heroku'."
+class Herobot
 
-  to_url = (command, term) ->
-    if command.escape?
-      command.url + term.replace(/\s+/g, command.escape)
-    else
-      command.url + term
+  constructor: ->
 
-  return {
-    bot:
-      jerk (bot) ->
-        bot.watch_for /^\s*(?:heroku\s*)+$|^heroku:/, (message) ->
-          message.msg heroku_help_message
-        for command, metadata of url_commands
-          regexp =
+    to_url = (command, term) ->
+      if command.escape?
+        command.url + term.replace(/\s+/g, command.escape)
+      else
+        command.url + term
+
+    @bot = Jerk (bot) ->
+
+      bot.watch_for /^\s*(?:heroku\s*)+$|^heroku:/, (message) ->
+        message.msg HEROKU_HELP_MESSAGE
+
+      for command, metadata of URL_COMMANDS
+        do (metadata) ->
+          regexp = new RegExp(
             "^" +                # beginning of line
-            "(?:(\\w+):\\s*)?" + # username target
+            "(?:(\\w+):\\s*)?" + # optional username target
             "\\s*!#{command}" +  # command
             "\\s*(.*)"           # search term
-          do (regexp, metadata) ->
-            bot.watch_for new RegExp(regexp), (message) ->
-              target = message.match_data[1] ? message.user
-              message.say target + ": " +  to_url(metadata, message.match_data[2])
-        bot
+          )
+          bot.watch_for regexp, (message) ->
+            target = message.match_data[1] ? message.user
+            message.say target + ": " +  to_url(metadata, message.match_data[2])
 
-    connect: ->
-      @bot.connect(options)
-  }
+      return bot
+
+  connect: (environment = 'development') ->
+    @bot.connect(OPTIONS[environment])
+
+module.exports = new Herobot()
