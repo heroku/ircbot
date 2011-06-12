@@ -1,10 +1,21 @@
 {
   "name": "herobot",
   "version": "0.0.1",
+  "author": "Jonathan Dance <npm@wuputah.com> (http://wuputah.com)",
+  "description": "IRC bot for #heroku on Freenode",
+  "homepage": "http://github.com/wuputah/herobot",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wuputah/herobot.git"
+  },
+  "engines": {
+    "node": "~v0.4.7"
+  },
   "dependencies": {
     "jerk": ">=1.1.12",
     "coloured": ">=0.2.0",
     "log": ">=1.2.0",
     "coffee-script": ">=1.1.1"
   }
+  "devDependencies": {}
 }
