@@ -27,7 +27,7 @@ module.exports = ->
  available only through http://support.heroku.com.  Please do not spam the
  channel with your question or the word 'heroku'."
 
-  _to_url = (command, term) ->
+  to_url = (command, term) ->
     if command.escape?
       command.url + term.replace(/\s+/g, command.escape)
     else
@@ -47,7 +47,7 @@ module.exports = ->
           do (regexp, metadata) ->
             bot.watch_for new RegExp(regexp), (message) ->
               target = message.match_data[1] ? message.user
-              message.say target + ": " +  _to_url(metadata, message.match_data[2])
+              message.say target + ": " +  to_url(metadata, message.match_data[2])
         bot
 
     connect: ->

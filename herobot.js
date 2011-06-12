@@ -1,6 +1,6 @@
 (function() {
   module.exports = function() {
-    var heroku_help_message, jerk, options, url_commands, _to_url;
+    var heroku_help_message, jerk, options, to_url, url_commands;
     jerk = require('jerk');
     options = {
       server: 'irc.freenode.net',
@@ -26,7 +26,7 @@
       }
     };
     heroku_help_message = "Welcome to the Heroku community channel. Before asking a question, please search http://devcenter.heroku.com and Google. You can check platform status at http://status.heroku.com.  Note that official support is available only through http://support.heroku.com.  Please do not spam the channel with your question or the word 'heroku'.";
-    _to_url = function(command, term) {
+    to_url = function(command, term) {
       if (command.escape != null) {
         return command.url + term.replace(/\s+/g, command.escape);
       } else {
@@ -43,7 +43,7 @@
           return bot.watch_for(new RegExp(regexp), function(message) {
             var target, _ref;
             target = (_ref = message.match_data[1]) != null ? _ref : message.user;
-            return message.say(target + ": " + _to_url(metadata, message.match_data[2]));
+            return message.say(target + ": " + to_url(metadata, message.match_data[2]));
           });
         };
         for (command in url_commands) {
