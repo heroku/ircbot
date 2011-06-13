@@ -14,7 +14,9 @@
   "dependencies": {
     "jerk": ">=1.1.15",
     "coloured": ">=0.2.0",
-    "log": ">=1.2.0"
+    "log": ">=1.2.0",
+    "request": ">=1.9.5",
+    "libxmljs": ">=0.4.2"
   },
   "devDependencies": {
     "coffee-script": ">=1.1.1"
