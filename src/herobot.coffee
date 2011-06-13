@@ -62,21 +62,21 @@ module.exports = new class Herobot
             target = message.match_data[1] ? message.user
             message.say target + ": " +  to_url(metadata, message.match_data[2])
 
-      @status_checker = new StatusChecker()
-        .on 'message', (message) ->
-          @bot.say @options.channels[0], "STATUS UPDATE: #{message.title} - #{message.url}"
-          message = if message.content.length > 420
-            message.content[0...400] + " ... (continued, see link)"
-          else
-            message.content
-          @boy.say @options.channels[0], message.content
-        .on 'status', (status) ->
-          msg = (for k, v of status
-            k + ": " + v
-          ).join(" - ")
-          @bot.say @options.channels[0], "PLATFORM STATUS: #{msg}"
-
       return bot
+
+    @status_checker = new StatusChecker()
+      .on 'message', (message) ->
+        @bot.say @options.channels[0], "STATUS UPDATE: #{message.title} - #{message.url}"
+        message = if message.content.length > 420
+          message.content[0...400] + " ... (continued, see link)"
+        else
+          message.content
+        @boy.say @options.channels[0], message.content
+      .on 'status', (status) ->
+        msg = (for k, v of status
+          k + ": " + v
+        ).join(" - ")
+        @bot.say @options.channels[0], "PLATFORM STATUS: #{msg}"
 
   connect: (environment = 'development') ->
     @options = OPTIONS[environment]
