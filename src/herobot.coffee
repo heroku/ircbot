@@ -1,5 +1,5 @@
 Jerk = require 'jerk'
-StatusChecker = require 'status_cheker'
+StatusChecker = require 'status_checker'
 
 OPTIONS =
   development:
