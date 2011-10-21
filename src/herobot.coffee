@@ -29,8 +29,8 @@ HEROKU_HELP_MESSAGE =
   Welcome to the Heroku community channel. Before asking a question, please
   search http://devcenter.heroku.com and Google. You can check platform status
   at http://status.heroku.com. Note that official support is available only
-  through http://support.heroku.com. Please do not spam the channel with your
-  question or the word 'heroku'.
+  through http://support.heroku.com. Please do not repeat/spam questions or the
+  word 'heroku' in the channel.
   '''
     .replace(/\n/g, ' ')
 
