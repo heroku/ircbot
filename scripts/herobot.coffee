@@ -21,7 +21,7 @@ module.exports = (robot) ->
     heroku_throttler.trigger(message)
 
   setTimeout ->
-    new Throttler(20 * 60)
+    new Throttler(30 * 60)
       .on 'trigger', ->
         # this is a hack to get a message out to the channel even though no one
         # asked for one. hubot doesnt do this very well.
