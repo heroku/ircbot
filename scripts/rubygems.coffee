@@ -3,6 +3,8 @@
 # there's a gem for <that>, gem me <that> - Returns a link to a gem on rubygems.org
 #
 
+_ = require('underscore')
+
 module.exports = (robot) ->
   responder = (msg) ->
     search = escape(msg.match[1])
@@ -12,7 +14,7 @@ module.exports = (robot) ->
           results = JSON.parse(body)
           response = "Exact match: https://rubygems.org/gems/#{search} - #{results['info']} - latest version: #{results['version']}"
           if results['dependencies']['runtime'].length > 0
-            response += " - dependencies: #{results['dependencies']['runtime'].join(', ')}"
+            response += " - dependencies: #{_.map(results['dependencies']['runtime'], (e) -> e['name']).join(', ')}"
           else
             response += " - no dependencies"
           response += " - source: #{results['source_code_uri']}" if results['source_code_uri']?
