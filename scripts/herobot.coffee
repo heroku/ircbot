@@ -20,6 +20,7 @@ module.exports = (robot) ->
   robot.hear /^(?:heroku\W*)+$|^heroku:/i, (message) ->
     heroku_throttler.trigger(message)
 
+  ###
   setTimeout ->
     new Throttler(30 * 60)
       .on 'trigger', ->
@@ -30,3 +31,4 @@ module.exports = (robot) ->
         throttler.trigger()
       .trigger()
   , 60 * 1000
+  ###
