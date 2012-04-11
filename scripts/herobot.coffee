@@ -19,16 +19,3 @@ module.exports = (robot) ->
 
   robot.hear /^(?:heroku\W*)+$|^heroku:/i, (message) ->
     heroku_throttler.trigger(message)
-
-  ###
-  setTimeout ->
-    new Throttler(30 * 60)
-      .on 'trigger', ->
-        # this is a hack to get a message out to the channel even though no one
-        # asked for one. hubot doesnt do this very well.
-        robot.bot.send("PRIVMSG #{process.env.HUBOT_IRC_ROOMS}", herobot_message)
-      .on 'timeout', (throttler) ->
-        throttler.trigger()
-      .trigger()
-  , 60 * 1000
-  ###

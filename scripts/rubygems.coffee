@@ -12,7 +12,10 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         if res.statusCode == 200
           results = JSON.parse(body)
-          response = "Exact match: https://rubygems.org/gems/#{search} - #{results['info']} - latest version: #{results['version']}"
+          info = results['info'].replace("\n", " ").replace(/\s+/, ' ')
+          if info.length > 100
+            info = info[0..100] + "..."
+          response = "Exact match: https://rubygems.org/gems/#{search} - #{info} - latest version: #{results['version']}"
           if results['dependencies']['runtime'].length > 0
             response += " - dependencies: #{_.map(results['dependencies']['runtime'], (e) -> e['name']).join(', ')}"
           else
