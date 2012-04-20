@@ -12,8 +12,6 @@ module.exports = (robot) ->
 
   heroku_help_message = "It looks like you need help! " + generic_help_message
 
-  herobot_message = "I'm herobot! " + generic_help_message
-
   heroku_throttler = new Throttler(10 * 60).on 'trigger', (message) ->
     message.send(heroku_help_message)
 
