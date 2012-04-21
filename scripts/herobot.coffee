@@ -6,7 +6,7 @@ module.exports = (robot) ->
     '''
     For urgent help, please visit https://support.heroku.com; for platform
     status: https://status.heroku.com; for docs: https://devcenter.heroku.com.
-    Say 'herobot help me' to learn more about me.
+    Say 'herobot help' to learn more about me.
     '''
       .replace(/\n/g, ' ')
 
