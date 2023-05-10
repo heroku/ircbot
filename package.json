@@ -20,7 +20,7 @@
   },
 
   "dependencies": {
-    "hubot": "2.x.x",
+    "hubot": "3.5.0",
     "hubot-irc": "0.x.x",
     "optparse": "1.x.x",
     "underscore": "1.x.x",
